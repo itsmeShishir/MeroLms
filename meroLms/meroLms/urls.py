@@ -20,4 +20,7 @@ urlpatterns = [
 #     for the register user
     path('accounts/register',user_login.REGISTER, name='register'),
     path('dologin', user_login.DO_LOGIN,name="dologin"),
+    path('accounts/profile', user_login.PROFILE, name="profile"),
+    path('accounts/profile/update', user_login.PROFILE_UPDATE, name="profile_update"),
+
 ]
