@@ -7,7 +7,7 @@
                 <!-- Signin -->
                 <div class="collapse show" id="collapseSignin" data-bs-parent="#accountModal">
                     <div class="modal-header">
-                        <h5 class="modal-title">Log In to Your Skola Account!</h5>
+                        <h5 class="modal-title">Log In to Your MeroLms Account!</h5>
                         <button type="button" class="close text-primary" data-bs-dismiss="modal" aria-label="Close">
                             <!-- Icon -->
                             <svg width="16" height="17" viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
@@ -80,14 +80,14 @@
 
                     <div class="modal-body">
                         <!-- Form Signup -->
-                        <form class="mb-5">
-
+                        <form class="mb-5" method="post" action="register">
+                            {% csrf_token %}
                             <!-- Username -->
                             <div class="form-group mb-5">
                                 <label for="modalSignupUsername">
                                     Username
                                 </label>
-                                <input type="text" class="form-control" id="modalSignupUsername" placeholder="John">
+                                <input type="text" class="form-control" id="modalSignupUsername" placeholder="John" name="username" style="border-radius:50px;" required>
                             </div>
 
                             <!-- Email -->
@@ -95,7 +95,7 @@
                                 <label for="modalSignupEmail">
                                     Username or Email
                                 </label>
-                                <input type="email" class="form-control" id="modalSignupEmail" placeholder="johndoe@creativelayers.com">
+                                <input type="email" class="form-control" id="modalSignupEmail" placeholder="johndoe@creativelayers.com" name="email" style="border-radius:50px;" required>
                             </div>
 
                             <!-- Password -->
@@ -103,7 +103,7 @@
                                 <label for="modalSignupPassword">
                                     Password
                                 </label>
-                                <input type="password" class="form-control" id="modalSignupPassword" placeholder="**********">
+                                <input type="password" class="form-control" id="modalSignupPassword" placeholder="**********" name="password" style="border-radius:50px;" required>
                             </div>
 
                             <!-- Submit -->

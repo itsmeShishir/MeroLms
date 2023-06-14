@@ -26,14 +26,16 @@
                 <!-- Login -->
                 <h3 class="mb-6">Log In to Your MeroLms Account!</h3>
 
+                {% include 'components/msg.html' %}
                 <!-- Form Login -->
-                <form class="mb-5">
+                <form class="mb-5" method="POST" action="{% url 'dologin' %}">
+                    {% csrf_token %}
                     <!-- Email -->
                     <div class="form-group mb-5">
                         <label for="modalSigninEmail1">
                             Username or Email
                         </label>
-                        <input type="email" class="form-control" id="modalSigninEmail1" placeholder="johndoe@gmail.com" style="border-radius:50px;">
+                        <input type="email" class="form-control" id="modalSigninEmail1" placeholder="johndoe@gmail.com" style="border-radius:50px;" name="email">
                     </div>
 
                     <!-- Password -->
@@ -41,7 +43,7 @@
                         <label for="modalSigninPassword1">
                             Password
                         </label>
-                        <input type="password" class="form-control" id="modalSigninPassword1" placeholder="**********" style="border-radius:50px;">
+                        <input type="password" class="form-control" id="modalSigninPassword1" placeholder="**********" style="border-radius:50px;" name="password">
                     </div>
 
                     <div class="d-flex align-items-center mb-5 font-size-sm">
