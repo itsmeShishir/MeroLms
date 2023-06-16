@@ -1,5 +1,4 @@
 from django.db import models
-
 # Create your models here.
 # creating the models for category
 class Categories(models.Model):
