@@ -1,66 +1,91 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<header class="py-8 py-md-11" style="background-image: none;">
-        <div class="container text-center py-xl-2">
-            <h1 class="display-4 fw-semi-bold mb-0">Get in touch today!</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-scroll justify-content-center">
-                    <li class="breadcrumb-item">
-                        <a class="text-gray-800" href="#">
-                            Home
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item text-gray-800 active" aria-current="page">
-                        Get in touch today!
-                    </li>
-                </ol>
-            </nav>
-        </div>
-        <!-- Img -->
-        <img class="d-none img-fluid" src="...html" alt="...">
-    </header>
+<header class="py-8 py-md-11" style="background-image: none">
+  <div class="container text-center py-xl-2">
+    <h1 class="display-4 fw-semi-bold mb-0">Get in touch today!</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb breadcrumb-scroll justify-content-center">
+        <li class="breadcrumb-item">
+          <a class="text-gray-800" href="#"> Home </a>
+        </li>
+        <li class="breadcrumb-item text-gray-800 active" aria-current="page">
+          Get in touch today!
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <!-- Img -->
+  <img class="d-none img-fluid" src="...html" alt="..." />
+</header>
 <!--end of header-->
 <!--start of contact -->
-<div class="container" style="width: 600px;">
-    <div class="row row-cols-md-1 mb-8 mb-lg-11">
-        <div class="col-md mx-auto">
-            <h1 class="mb-6">Have A Question?</h1>
-            <form class="row">
-                <div class="form-group mb-6 col-xl-6">
-                    <label for="exampleInputTitle1">First Name</label>
-                    <input type="text" class="form-control placeholder-1" id="exampleInputTitle1" placeholder="john">
-                </div>
-
-                <div class="form-group mb-6 col-xl-6">
-                    <label for="exampleInputTitle2">Last Name</label>
-                    <input type="email" class="form-control placeholder-1" id="exampleInputTitle2" placeholder="doe">
-                </div>
-
-                <div class="form-group mb-6 col-12">
-                    <label for="exampleFormControlTextarea1">Email</label>
-                    <input class="form-control placeholder-1" id="exampleInputTitle3" placeholder="johndoe@gmail.com">
-                </div>
-
-                <div class="form-group mb-6 col-12">
-                    <label for="exampleFormControlTextarea1">Phone</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">+977</span>
-                        </div>
-                        <input type="text" class="form-control" id="exampleInputTitle4" placeholder="9862625004" readonly>
-                    </div>
-                </div>
-
-                <div class="form-group mb-6 col-12">
-                    <label for="exampleFormControlTextarea1">Message</label>
-                    <textarea class="form-control placeholder-1" id="exampleFormControlTextarea1" rows="6" placeholder="Content"></textarea>
-                </div>
-
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block mw-md-300p">SEND</button>
-                </div>
-            </form>
+<div class="container" style="width: 600px">
+  <div class="row row-cols-md-1 mb-8 mb-lg-11">
+    <div class="col-md mx-auto">
+      <h1 class="mb-6">Have A Question?</h1>
+      <form class="row">
+        <div class="form-group mb-6 col-xl-6">
+          <label for="exampleInputTitle1">First Name</label>
+          <input
+            type="text"
+            class="form-control placeholder-1"
+            id="exampleInputTitle1"
+            placeholder="john"
+          />
         </div>
+
+        <div class="form-group mb-6 col-xl-6">
+          <label for="exampleInputTitle2">Last Name</label>
+          <input
+            type="email"
+            class="form-control placeholder-1"
+            id="exampleInputTitle2"
+            placeholder="doe"
+          />
+        </div>
+
+        <div class="form-group mb-6 col-12">
+          <label for="exampleFormControlTextarea1">Email</label>
+          <input
+            class="form-control placeholder-1"
+            id="exampleInputTitle3"
+            placeholder="johndoe@gmail.com"
+          />
+        </div>
+
+        <div class="form-group mb-6 col-12">
+          <label for="exampleFormControlTextarea1">Phone</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">+977</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputTitle4"
+              placeholder="9862625004"
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="form-group mb-6 col-12">
+          <label for="exampleFormControlTextarea1">Message</label>
+          <textarea
+            class="form-control placeholder-1"
+            id="exampleFormControlTextarea1"
+            rows="6"
+            placeholder="Content"
+          ></textarea>
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-block mw-md-300p">
+            SEND
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 <!--End of contact-->
 

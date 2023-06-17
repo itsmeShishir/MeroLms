@@ -8,11 +8,24 @@ class Categories(models.Model):
     def __str__(self):
         return self.name
 
+    def get_all_category(self):
+        return Categories.objects.all().order_by('id')
+
 #for the author courses details
 class Author(models.Model):
     author_profile = models.ImageField(upload_to="Media/author")
     name = models.CharField(max_length=100, null=True)
     about_author = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+
+
+# for the level of the courses
+class Levels(models.Model):
+    name= models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
@@ -30,6 +43,7 @@ class Course(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     description = models.TextField()
+    level = models.ForeignKey(Levels, on_delete=models.CASCADE, null=True)
     price = models.IntegerField(null=True, default=0)
     discount = models.IntegerField(null=True)
     slug = models.SlugField(default='', max_length=500, null=True, blank=True)
