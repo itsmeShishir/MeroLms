@@ -26,7 +26,7 @@
 <div class="container mb-6 mb-xl-8 z-index-2">
   <div class="d-xl-flex align-items-center">
     <p class="mb-xl-0">
-      We found <span class="text-dark">834 courses</span> available for you
+      We found <span class="text-dark">5 courses</span> available for you
     </p>
     <div class="ms-xl-auto d-xl-flex flex-wrap">
       <div class="dropdown">
@@ -61,7 +61,7 @@
               Level
             </button>
             <ul class="dropdown-menu" aria-labelledby="sortDropdownButton">
-              {% for item in level %}
+              {% for item in levels %}
               <li><a class="dropdown-item" href="#">{{ item.name }}</a></li>
               {% endfor %}
             </ul>
@@ -85,7 +85,7 @@
           <a href="course-single-v5.html" class="card-img sk-thumbnail d-block">
             <img
               class="rounded shadow-light-lg"
-              src="{%static 'assets/img/products/product-2.jpg'%}"
+              src="{{i.featured_image}}"
               alt="..."
             />
           </a>
@@ -98,7 +98,7 @@
               class="avatar avatar-xl sk-fade-right badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg"
             >
               <img
-                src="{%static 'assets/img/avatars/avatar-2.jpg'%}"
+                src="{{i.author.author_profile}}"
                 alt="..."
                 class="avatar-img rounded-circle"
               />
@@ -108,7 +108,7 @@
           <!-- Preheading -->
           <a href="course-single-v5.html"
             ><span class="mb-1 d-inline-block text-gray-800"
-              >Development</span
+              >{{i.category.name}}</span
             ></a
           >
 
@@ -118,7 +118,7 @@
               ><h4
                 class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4 mb-2"
               >
-                The Complete JavaScript Course 2020: Build Real Projects!
+                {{i.title}}
               </h4></a
             >
 
@@ -182,8 +182,8 @@
               </div>
 
               <div class="col-auto px-2 text-right">
-                <del class="font-size-sm">$959</del>
-                <ins class="h4 mb-0 d-block mb-lg-n1">$21.99</ins>
+                <del class="font-size-sm">Nrs {{i.price}}</del>
+                <ins class="h4 mb-0 d-block mb-lg-n1">Nrs </ins>
               </div>
             </div>
           </div>

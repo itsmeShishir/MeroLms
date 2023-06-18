@@ -26,7 +26,6 @@ class Author(models.Model):
 # for the level of the courses
 class Levels(models.Model):
     name= models.CharField(max_length=100)
-
     def __str__(self):
         return self.name
 

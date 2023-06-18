@@ -25,12 +25,13 @@ def CONTACT(request):
 def COURSES(request):
     category = Categories.get_all_category(Categories)
     course = Course.objects.filter(status='PUBLISH').order_by('-id')
-    # levels = Levels.object.all()
+    levels = Levels.objects.all().order_by('id')[0:3]
     context = {
         'category': category,
-        # 'level': level,
+        'levels': levels,
         'course': course,
     }
+    print(levels)
     return render(request, 'main/courses.html',context)
 
 def BLOG(request):
