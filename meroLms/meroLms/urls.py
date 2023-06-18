@@ -15,7 +15,8 @@ urlpatterns = [
     path('contact',views.CONTACT, name = "contact"),
     path('blog', views.BLOG, name="blog"),
     path('courses', views.COURSES, name="courses"),
-    path('singlecourses', views.SINGLE_COURSES, name="single_courses"),
+    path('blog/<slug:slug>/', views.SINGLE_COURSES, name='single_blog'),
+    #path('singlecourses/<slug:slug>/', views.SINGLE_COURSES, name="single_courses"),
     path('singleblog', views.SINGLE_BLOG, name="single_blog"),
 
 #     for the login and register path for the user
