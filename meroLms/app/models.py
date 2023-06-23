@@ -87,3 +87,11 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
+# for the slider modules
+class Slider(models.Model):
+    author_profile = models.ImageField(upload_to="Media/slider")
+    name = models.CharField(max_length=100, null=True)
+    about_author = models.TextField()
+
+    def __str__(self):
+        return self.name

@@ -1,4 +1,32 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %} {% load course_tags %}
+<script>
+$(document).ready(function(){
+
+	$(".filter-checkbox").on('click', function(){
+		var filter_object={};
+		$(".filter-checkbox").each(function(index,ele){
+			var filter_value=$(this).val();
+			var filter_key=$(this).data('filter');
+		    console.log(filter_key,filter_value);
+			filter_object[filter_key]=Array.from(document.querySelectorAll('input[data-filter='+filter_key+']:checked')).map(function(el){
+			 	return el.value;
+			});
+		});
+
+		$.ajax({
+			url:'{% url 'filter-data' %}',
+			data:filter_object,
+			dataType:'json',
+			success:function(res){
+			    console.log(res)
+				$("#filteredProducts").html(res.data);
+				var filter_value=$(this).val();
+			    var filter_key=$(this).data('filter');
+			}
+		});
+	});
+});
+</script>
 <!--start of courses-->
 <!--start of header-->
 <header
@@ -41,7 +69,10 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           {% for i in category %}
-          <li><a class="dropdown-item" href="#">{{i.name}}</a></li>
+          <li class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input filter-checkbox" id="category-{{i.id}}" data-filter="category" value="{{i.id}}">
+            <label class="custom-control-label font-size-base" for="category-{{i.id}}">{{i.name}} ({{i.course_set.all.count}})</label>
+          </li>
           {% endfor %}
         </ul>
       </div>
@@ -61,9 +92,44 @@
               Level
             </button>
             <ul class="dropdown-menu" aria-labelledby="sortDropdownButton">
-              {% for item in levels %}
-              <li><a class="dropdown-item" href="#">{{ item.name }}</a></li>
+              {% for i in levels %}
+              <li class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input filter-checkbox" id="level-{{i.id}}" value="{{i.id}}" data-filter="level">
+                  <label class="custom-control-label font-size-base" for="level-{{i.id}}">{{i.name}} ({{i.course_set.all.count}})</label>
+              </li>
               {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+     <div class="mb-4 mb-xl-0 ms-xl-6">
+        <div
+          class="border rounded d-flex align-items-center choices-label h-50p"
+        >
+          <span class="ps-5">Sort by:</span>
+          <div class="dropdown">
+            <button
+              class="btn btn-sm btn-secondary dropdown-toggle"
+              type="button"
+              id="sortDropdownButton5"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Level
+            </button>
+             <ul class="dropdown-menu" aria-labelledby="sortDropdownButton5">
+                <li class="custom-control custom-radio">
+                     <input type="radio" id="price-1" name="customRadio" class="custom-control-input filter-checkbox" value="priceall" data-filter="price">
+                     <label class="custom-control-label font-size-base" for="price-1">All (1)</label>
+                </li>
+                <li class="custom-control custom-radio">
+                     <input type="radio" id="price-2" name="customRadio" class="custom-control-input filter-checkbox" value="pricefree" data-filter="price">
+                     <label class="custom-control-label font-size-base" for="price-2">Free (3)</label>
+                </li>
+                <li class="custom-control custom-radio">
+                     <input type="radio" id="price-3" name="customRadio" class="custom-control-input filter-checkbox" value="pricepaid" data-filter="price">
+                    <label class="custom-control-label font-size-base" for="price-3">Paid (15)</label>
+                 </li>
             </ul>
           </div>
         </div>
@@ -73,7 +139,7 @@
 </div>
 <!--end of filter option-->
 <div class="container pb-4 pb-xl-7">
-  <div class="row row-cols-md-2 row-cols-xl-3 mb-6 mb-xl-3">
+  <div class="row row-cols-md-2 row-cols-xl-3 mb-6 mb-xl-3" id = "filteredCourses">
     {% for i in course %}
     <div class="col-md pb-4 pb-md-7">
       <!-- Card -->
@@ -82,7 +148,7 @@
       >
         <!-- Image -->
         <div class="card-zoom position-relative">
-          <a href="course-single-v5.html" class="card-img sk-thumbnail d-block">
+          <a href=" {% url 'single_courses' id=i.id %}  " class="card-img sk-thumbnail d-block">
             <img
               class="rounded shadow-light-lg"
               src="{{i.featured_image}}"
@@ -93,7 +159,7 @@
 
         <!-- Footer -->
         <div class="card-footer px-2 pb-2 mb-1 pt-4 position-relative">
-          <a href="instructors-single.html" class="">
+          <a href="{% url 'single_courses' id=i.id %}" class="">
             <div
               class="avatar avatar-xl sk-fade-right badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg"
             >
@@ -106,7 +172,7 @@
           </a>
 
           <!-- Preheading -->
-          <a href="course-single-v5.html"
+          <a href="{% url 'single_courses' id=i.id %}"
             ><span class="mb-1 d-inline-block text-gray-800"
               >{{i.category.name}}</span
             ></a
@@ -114,7 +180,7 @@
 
           <!-- Heading -->
           <div class="position-relative">
-            <a href="course-single-v5.html" class="d-block stretched-link"
+            <a href="{% url 'single_courses' id=i.id %}" class="d-block stretched-link"
               ><h4
                 class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4 mb-2"
               >
@@ -183,7 +249,7 @@
 
               <div class="col-auto px-2 text-right">
                 <del class="font-size-sm">Nrs {{i.price}}</del>
-                <ins class="h4 mb-0 d-block mb-lg-n1">Nrs </ins>
+                <ins class="h4 mb-0 d-block mb-lg-n1">Nrs {% discount_calculation i.price i.discount %}</ins>
               </div>
             </div>
           </div>
