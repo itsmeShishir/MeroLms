@@ -16,7 +16,7 @@ urlpatterns = [
     path('blog', views.BLOG, name="blog"),
     path('courses', views.COURSES, name="courses"),
     #path('blog/<slug:slug>/', views.SINGLE_COURSES, name='single_blog'),
-    path('singlecourses/<int:id>/', views.SINGLE_COURSES, name="single_courses"),
+    path('singlecourses/<slug:slug>/', views.SINGLE_COURSES, name="single_courses"),
     path('single_blog/<int:id>/', views.SINGLE_BLOG, name="single_blog"),
 
 #     for the login and register path for the user
@@ -26,7 +26,7 @@ urlpatterns = [
     path('dologin', user_login.DO_LOGIN,name="dologin"),
     path('accounts/profile', user_login.PROFILE, name="profile"),
     path('accounts/profile/update', user_login.PROFILE_UPDATE, name="profile_update"),
-    path('product/filter-data',views.filter_data,name="filter-data"),
+    path('course/filter-data',views.filter_data,name="filter-data"),
     path('search',views.SEARCH_COURSE,name='search_course'),
 
 

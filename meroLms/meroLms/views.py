@@ -44,12 +44,8 @@ def BLOG(request):
     return render(request, 'main/blog.html',context)
 
 
-def SINGLE_COURSES(request,id):
-    course = get_object_or_404(Course,id)
-    context ={
-        'course': course
-    }
-    return render(request, 'main/singlecourse.html',context)
+def SINGLE_COURSES(request,slug):
+    return render(request, 'main/singlecourse.html')
 
 
 def SINGLE_BLOG(request):
