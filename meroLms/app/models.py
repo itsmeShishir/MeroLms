@@ -75,10 +75,25 @@ def create_slug(instance, new_slug=None):
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
-
-
-
 pre_save.connect(pre_save_post_receiver, Course)
+
+
+#create what will you learn
+class WhatYouLearn(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    points = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.points
+
+#make Requirement ofr course
+class Requirement(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    points = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.points
+
 
 # creating the models for category
 class BlogCategories(models.Model):

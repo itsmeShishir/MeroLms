@@ -8,15 +8,9 @@
           {{course.title}}
         </h1>
         <p class="me-xl-13 mb-5 text-black">
-          {{course.title}}
+          {{course.description|truncatewords:15}}
         </p>
 
-        <a
-          href="#"
-          class="badge badge-lg badge-rounded-circle badge-secondary font-size-base badge-float badge-float-inside top-0 text-white"
-        >
-          <i class="far fa-heart"></i>
-        </a>
       </div>
 
       <!-- COURSE META
@@ -27,7 +21,7 @@
         >
           <div class="p-2">
             <img
-              src="{%static 'assets/img/avatars/avatar-1.jpg'%}"
+              src="/{{course.author.author_profile}}"
               alt="..."
               class="rounded-circle"
               width="68"
@@ -37,17 +31,17 @@
         </div>
 
         <div class="mb-4 mb-md-0 me-md-8 me-lg-4 me-xl-8">
-          <h6 class="mb-0 text-white">Created by</h6>
-          <a href="#" class="font-size-sm text-white">Alison Dawn</a>
+          <h6 class="mb-0 text-black">Created by</h6>
+          <a href="#" class="font-size-sm text-black">{{course.author.name}}</a>
         </div>
 
         <div class="mb-4 mb-md-0 me-md-8 me-lg-4 me-xl-8">
-          <h6 class="mb-0 text-white">Categories</h6>
-          <a href="#" class="font-size-sm text-white">Design</a>
+          <h6 class="mb-0 text-black">Categories</h6>
+          <a href="#" class="font-size-sm text-black">{{course.category.name}}</a>
         </div>
 
         <div class="mb-4 mb-md-0 me-md-6 me-lg-4 me-xl-6">
-          <h6 class="mb-0 text-white">Review</h6>
+          <h6 class="mb-0 text-black">Review</h6>
           <div class="d-lg-flex align-items-center">
             <div class="star-rating mb-2 mb-lg-0">
               <div class="rating" style="width: 100%"></div>
@@ -126,26 +120,12 @@
         >
           <h3 class="">Course Description</h3>
           <p class="mb-6 line-height-md">
-            Do you want to become a UI/UX designer but you don't know where to
-            start? This course will allow you to develop your user interface
-            design skills and you can add UI designer to your CV and start
-            getting clients for your skills.
-          </p>
-          <p class="mb-6 line-height-md">
-            Hi everyone. I'm Arash and I'm a UI/UX designer. In this course, I
-            will help you learn and master Figma app comprehensively from
-            scratch. Figma is an innovative and brilliant tool for User
-            Interface design. It's used by everyone from entrepreneurs and
-            start-ups to Apple, Airbnb, Facebook, etc.
+            {{course.description|slice:"0:500"}}
           </p>
           <p class="collapse mb-6 line-height-md" id="readcollapseExample">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-            labore wes anderson cred nesciunt sapiente I will help you learn and
-            master Figma app comprehensively from scratch. Figma is an
-            innovative and brilliant tool for User Interface design. It's used
-            by everyone from entrepreneurs ea proident.
+            {{course.description|slice:"501:3000"}}
           </p>
+
           <a
             class="text-teal read-more h6 d-inline-block mb-8"
             data-bs-toggle="collapse"
@@ -173,7 +153,7 @@
           </a>
 
           <a
-            href="https://www.youtube.com/watch?v=9I-Y6VQ6tyI"
+            href="https://www.youtube.com/{{course.featured_video}}"
             class="d-block sk-thumbnail rounded mb-8"
             data-fancybox=""
           >
@@ -195,7 +175,7 @@
             </div>
             <img
               class="rounded shadow-light-lg"
-              src="{%static 'assets/img/products/product-2.jpg'%}"
+              src="/{{course.featured_image}}"
               alt="..."
             />
           </a>
@@ -204,34 +184,26 @@
           <div class="row row-cols-lg-2 mb-8">
             <div class="col-md">
               <ul class="list-style-v1 list-unstyled">
-                <li>Become a UI/UX designer.</li>
-                <li>You will be able to start earning money skills.</li>
-                <li>Build a UI project from beginning to end.</li>
-                <li>Work with colors &amp; fonts.</li>
-                <li>You will create your own UI Kit.</li>
+               {% for learn in course.whatyoulearn_set.all|slice:"0:5" %}
+                <li>{{learn.points}}</li>
+                {% endfor %}
               </ul>
             </div>
 
             <div class="col-md">
               <ul class="list-style-v1 list-unstyled ms-xl-6">
-                <li>Build &amp; test a complete mobile app.</li>
-                <li>Learn to design mobile apps &amp; websites.</li>
-                <li>Design 3 different logos.</li>
-                <li>Create low-fidelity wireframe.</li>
-                <li>Downloadable exercise files.</li>
+                {% for learn in course.whatyoulearn_set.all|slice:"6:12" %}
+                  <li>{{learn.points}}</li>
+                {% endfor %}
               </ul>
             </div>
           </div>
 
           <h3 class="mb-5">Requirements</h3>
           <ul class="list-style-v2 list-unstyled">
-            <li>
-              We do not require any previous experience or pre-defined skills to
-              take this course. A great orientation would be enough to master
-              UI/UX design.
-            </li>
-            <li>A computer with a good internet connection.</li>
-            <li>Adobe Photoshop (OPTIONAL)</li>
+                {% for requirement in course.requirement_set.all %}
+                  <li>{{requirement.points}}</li>
+                {% endfor %}
           </ul>
         </div>
 
@@ -1779,15 +1751,15 @@
             <div class="d-inline-block rounded-circle border me-6 p-2">
               <div class="avatar avatar-size-120">
                 <img
-                  src="{%static 'assets/img/avatars/avatar-2.jpg'%}"
+                  src="{{course.author.author_profile}}"
                   alt="..."
                   class="avatar-img rounded-circle"
                 />
               </div>
             </div>
             <div class="media-body">
-              <h4 class="mb-0">Lauren Handerson</h4>
-              <span>iOS Developer &amp; UI Designer</span>
+              <h4 class="mb-0">{{course.author.name}}</h4>
+              <span>{{course.category.name}}</span>
             </div>
           </div>
 
@@ -2225,7 +2197,7 @@
           </div>
           <img
             class="rounded shadow-light-lg"
-            src="{%static 'assets/img/products/product-2.jpg'%}"
+            src="/{{course.featured_image}}"
             alt="..."
           />
         </a>
