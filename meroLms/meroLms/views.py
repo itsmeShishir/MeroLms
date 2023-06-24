@@ -19,10 +19,20 @@ def HOME(request):
 
 
 def ABOUT(request):
-    return render(request, 'main/about.html')
+    category = Categories.get_all_category(Categories)
+
+    context = {
+        'category': category
+    }
+    return render(request, 'main/about.html',context)
 
 def CONTACT(request):
-    return render(request, 'main/contact.html')
+    category = Categories.get_all_category(Categories)
+
+    context={
+        'category':category
+    }
+    return render(request, 'main/contact.html',context)
 
 def COURSES(request):
     category = Categories.get_all_category(Categories)
@@ -37,19 +47,36 @@ def COURSES(request):
     return render(request, 'main/courses.html',context)
 
 def BLOG(request):
+    category = Categories.get_all_category(Categories)
     blog = Blog.objects.filter(status='PUBLISH').order_by('-id')
     context = {
         'blog': blog,
+        'category': category
     }
     return render(request, 'main/blog.html',context)
 
 
 def SINGLE_COURSES(request,slug):
-    return render(request, 'main/singlecourse.html')
+    category = Categories.get_all_category(Categories)
+    course = Course.objects.filter(slug = slug)
+    if course.exists():
+        course = course.first()
+    else:
+        return redirect('404')
+
+    context={
+        'course':course,
+        'category': category
+    }
+    return render(request, 'main/singlecourse.html',context)
 
 
 def SINGLE_BLOG(request):
-    return render(request, 'main/singleblog.html')
+    category = Categories.get_all_category(Categories)
+    context = {
+        'category': category
+    }
+    return render(request, 'main/singleblog.html',context)
 
 
 def filter_data(request):
@@ -77,9 +104,19 @@ def filter_data(request):
 
 
 def SEARCH_COURSE(request):
+    category = Categories.get_all_category(Categories)
     query = request.GET['query']
     course = Course.objects.filter(title__icontains = query)
     context = {
+        'category': category,
         'course':course,
     }
     return render(request,'search/search.html',context)
+
+
+def PAGE_NOT_FOUND(request):
+    category = Categories.get_all_category(Categories)
+    context = {
+        'category': category
+    }
+    return render(request, 'error/404.html',context)

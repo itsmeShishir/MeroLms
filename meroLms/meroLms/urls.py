@@ -18,7 +18,7 @@ urlpatterns = [
     #path('blog/<slug:slug>/', views.SINGLE_COURSES, name='single_blog'),
     path('singlecourses/<slug:slug>/', views.SINGLE_COURSES, name="single_courses"),
     path('single_blog/<int:id>/', views.SINGLE_BLOG, name="single_blog"),
-
+    path('404', views.PAGE_NOT_FOUND, name="404"),
 #     for the login and register path for the user
     path('accounts/', include('django.contrib.auth.urls')),
 #     for the register user
