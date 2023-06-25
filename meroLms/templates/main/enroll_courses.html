@@ -137,19 +137,20 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
+{% include 'components/msg.html' %}
 <!--end of filter option-->
 <div class="container pb-4 pb-xl-7">
   <div class="row row-cols-md-2 row-cols-xl-3 mb-6 mb-xl-3" id = "filteredCourses">
     {% for i in course %}
       <div class="col-md pb-4 pb-md-7">
         <!-- Card -->
-        <a href="{{i.get_absolute_url}}">
+        <a href="{{i.course.get_absolute_url}}">
             <div class="card border shadow lift sk-fade">
           <!-- Image -->
           <div class="card-zoom position-relative rounded-bottom-0">
             <div class="badge-float sk-fade-top top-0 right-0 mt-4 me-4">
               <a
-                href="{{i.get_absolute_url}}"
+                href="{{i.course.get_absolute_url}}"
                 class="btn btn-xs btn-dark text-white rounded-circle lift opacity-dot-7 me-1 p-2 d-inline-flex justify-content-center align-items-center w-36 h-36"
               >
                 <!-- Icon -->
@@ -189,7 +190,7 @@ $(document).ready(function(){
             </div>
 
             <a
-              href="{{i.get_absolute_url}}"
+              href="{{i.course.get_absolute_url}}"
               class="card-img sk-thumbnail d-block rounded-bottom-0"
             >
               <img
@@ -210,7 +211,7 @@ $(document).ready(function(){
 
           <!-- Footer -->
           <div class="card-footer p-4 position-relative">
-            <a href="{{i.get_absolute_url}}" class="d-block">
+            <a href="{{i.course.get_absolute_url}}" class="d-block">
               <div
                 class="avatar avatar-xl badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg"
               >
@@ -223,7 +224,7 @@ $(document).ready(function(){
             </a>
 
             <!-- Preheading -->
-            <a href="{{i.get_absolute_url}}"
+            <a href="{{i.course.get_absolute_url}}"
               ><span class="mb-1 d-inline-block text-gray-800"
                 >{{i.course.category.name}}</span
               ></a
@@ -231,7 +232,7 @@ $(document).ready(function(){
 
             <!-- Heading -->
             <div class="position-relative">
-              <a href="{{i.get_absolute_url}}" class="d-block stretched-link"
+              <a href="{{i.course.get_absolute_url}}" class="d-block stretched-link"
                 ><h4
                   class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4"
                 >

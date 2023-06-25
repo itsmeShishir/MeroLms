@@ -132,3 +132,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
+
+
+KEY_ID = 'test_public_key_4ca914f101f9433fb6a840543b304392'
+KEY_SECRET = "test_secret_key_30f903e91c0a4909bf5b4ba667808b95"

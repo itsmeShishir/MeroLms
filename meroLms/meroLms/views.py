@@ -3,7 +3,7 @@ from django.shortcuts import redirect,render, get_object_or_404
 from app.models import Categories, Course, Levels, BlogCategories, Blog, Video, UserCourse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
-
+from django.contrib import messages
 
 
 def BASE(request):
@@ -137,15 +137,35 @@ def PAGE_NOT_FOUND(request):
 
 def CHECKOUT(request,slug):
     course = Course.objects.get(slug = slug)
-
+    action = request.GET.get('action')
     if course.price == 0:
         usercourse = UserCourse(
             user = request.user,
             course = course
         )
         usercourse.save()
-        return redirect('courses')
-    return render(request, 'checkout/checkout.html')
+        messages.success(request, "Course Are Successfully Enrolled")
+        return redirect('enroll_courses')
+    elif action == 'create_payment':
+        if request.method == "POST":
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            country = request.POST.get('country')
+            address = request.POST.get('address')
+            city = request.POST.get('city')
+            state = request.POST.get('state')
+            postcode = request.POST.get('postcode')
+            phone = request.POST.get('phone')
+            email = request.POST.get('email')
+            order_comments = request.POST.get('order_comments')
+
+            amount = course.price * 100
+            currency= "Nrs"
+
+    context = {
+        'course':course,
+    }
+    return render(request, 'checkout/checkout.html',context)
 
 
 def ENROLL_COURSES(request):
