@@ -9,8 +9,11 @@ class what_you_learn_TabularInline(admin.TabularInline):
 class requirement_TabularInline(admin.TabularInline):
     model = Requirement
 
+class Video_TabularInline(admin.TabularInline):
+    model = Video
+
 class course_admin(admin.ModelAdmin):
-    inlines = (what_you_learn_TabularInline,requirement_TabularInline )
+    inlines = (what_you_learn_TabularInline,requirement_TabularInline, Video_TabularInline )
 
 admin.site.register(Categories)
 admin.site.register(Author)
@@ -22,3 +25,6 @@ admin.site.register(Blog)
 admin.site.register(Slider)
 admin.site.register(Requirement)
 admin.site.register(WhatYouLearn)
+admin.site.register(Lesson)
+admin.site.register(Video)
+admin.site.register(Language)

@@ -1,5 +1,6 @@
+from django.db.models import Sum
 from django.shortcuts import redirect,render, get_object_or_404
-from app.models import Categories, Course, Levels, BlogCategories, Blog
+from app.models import Categories, Course, Levels, BlogCategories, Blog, Video
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 
@@ -58,6 +59,7 @@ def BLOG(request):
 
 def SINGLE_COURSES(request,slug):
     category = Categories.get_all_category(Categories)
+    time_duration= Video.objects.filter(course__slug = slug).aggregate(sum= Sum('time_duration'))
     course = Course.objects.filter(slug = slug)
     if course.exists():
         course = course.first()
@@ -66,7 +68,8 @@ def SINGLE_COURSES(request,slug):
 
     context={
         'course':course,
-        'category': category
+        'category': category,
+        'time_duration':time_duration
     }
     return render(request, 'main/singlecourse.html',context)
 
