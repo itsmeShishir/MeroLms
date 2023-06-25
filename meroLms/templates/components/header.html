@@ -104,16 +104,6 @@
                                     Account
                                 </a>
                             </li>
-                            <li class="dropdown-item">
-                                <a class="dropdown-link" href="">
-                                    Enrolled Courses
-                                </a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a href="{% url 'logout' %}" class="dropdown-link">
-                                    Logout
-                                </a>
-                            </li>
                         </ul>
                     </li>
                     {% elif user.is_authenticated %}
@@ -129,7 +119,7 @@
                                 </a>
                             </li>
                             <li class="dropdown-item">
-                                <a class="dropdown-link" href="">
+                                <a class="dropdown-link" href="{% url 'enroll_courses' %}">
                                     Enrolled Courses
                                 </a>
                             </li>

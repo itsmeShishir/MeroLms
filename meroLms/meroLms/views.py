@@ -1,8 +1,10 @@
 from django.db.models import Sum
 from django.shortcuts import redirect,render, get_object_or_404
-from app.models import Categories, Course, Levels, BlogCategories, Blog, Video
+from app.models import Categories, Course, Levels, BlogCategories, Blog, Video, UserCourse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+
+
 
 def BASE(request):
     return render(request,'base.html')
@@ -37,14 +39,13 @@ def CONTACT(request):
 
 def COURSES(request):
     category = Categories.get_all_category(Categories)
-    course = Course.objects.filter(status='PUBLISH').order_by('-id')
+    course = Course.objects.filter(status = 'PUBLISH').order_by('-id')
     levels = Levels.objects.all().order_by('id')[0:3]
     context = {
         'category': category,
         'levels': levels,
         'course': course,
     }
-    print(levels)
     return render(request, 'main/courses.html',context)
 
 def BLOG(request):
@@ -60,6 +61,14 @@ def BLOG(request):
 def SINGLE_COURSES(request,slug):
     category = Categories.get_all_category(Categories)
     time_duration= Video.objects.filter(course__slug = slug).aggregate(sum= Sum('time_duration'))
+
+    course_id = Course.objects.get(slug=slug)
+    # check_enroll = UserCourse.objects.get(user = request.user, course= course_id )
+
+    try:
+        check_enroll = UserCourse.objects.get(user=request.user, course=course_id)
+    except UserCourse.DoesNotExist:
+        check_enroll = None
     course = Course.objects.filter(slug = slug)
     if course.exists():
         course = course.first()
@@ -69,7 +78,8 @@ def SINGLE_COURSES(request,slug):
     context={
         'course':course,
         'category': category,
-        'time_duration':time_duration
+        'time_duration':time_duration,
+        'check_enroll': check_enroll,
     }
     return render(request, 'main/singlecourse.html',context)
 
@@ -125,13 +135,22 @@ def PAGE_NOT_FOUND(request):
     return render(request, 'error/404.html',context)
 
 
-def CHECKOUT(request, slug):
+def CHECKOUT(request,slug):
     course = Course.objects.get(slug = slug)
+
     if course.price == 0:
         usercourse = UserCourse(
             user = request.user,
             course = course
         )
         usercourse.save()
-        return redirect('home')
+        return redirect('courses')
     return render(request, 'checkout/checkout.html')
+
+
+def ENROLL_COURSES(request):
+    course = UserCourse.objects.filter(user=request.user)
+    context = {
+        'course': course,
+    }
+    return render(request, 'main/enroll_courses.html', context)

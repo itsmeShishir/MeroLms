@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
@@ -188,3 +189,12 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+class UserCourse(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    paid = models.BooleanField(default=0)
+    data = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.first_name + " - " + self.course.title

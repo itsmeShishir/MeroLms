@@ -28,7 +28,7 @@ urlpatterns = [
     path('accounts/profile/update', user_login.PROFILE_UPDATE, name="profile_update"),
     path('course/filter-data',views.filter_data,name="filter-data"),
     path('search',views.SEARCH_COURSE,name='search_course'),
-
+    path('enroll_courses', views.ENROLL_COURSES, name="enroll_courses"),
     path('checkout/<slug:slug>', views.CHECKOUT, name="checkout")
 
 
