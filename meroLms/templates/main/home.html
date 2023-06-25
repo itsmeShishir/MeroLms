@@ -818,16 +818,22 @@
                             />
                           </svg>
                         </div>
-                        <div class="font-size-sm">8h 12m</div>
+                        <div class="font-size-sm">{{i.course.time_duration.sum}} min</div>
                       </div>
                     </li>
                   </ul>
                 </div>
 
+                {% if i.price == 0 %}
                 <div class="col-auto px-2 text-right">
-                    <del class="font-size-sm">Nrs {{i.price}}</del>
-                    <ins class="h4 mb-0 d-block mb-lg-n1">Nrs {% discount_calculation i.price i.discount %}</ins>
+                  <ins class="h4 mb-0 d-block mb-lg-n1">Free</ins>
                 </div>
+              {% else %}
+                <div class="col-auto px-2 text-right">
+                  <del class="font-size-sm">Nrs {{i.price}}</del>
+                  <ins class="h4 mb-0 d-block mb-lg-n1">Nrs {% discount_calculation i.price i.discount %}</ins>
+                </div>
+              {% endif %}
               </div>
             </div>
           </div>

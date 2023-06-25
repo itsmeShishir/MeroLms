@@ -29,6 +29,7 @@ urlpatterns = [
     path('course/filter-data',views.filter_data,name="filter-data"),
     path('search',views.SEARCH_COURSE,name='search_course'),
 
+    path('checkout/<slug:slug>', views.CHECKOUT, name="checkout")
 
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

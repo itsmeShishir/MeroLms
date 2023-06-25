@@ -123,3 +123,15 @@ def PAGE_NOT_FOUND(request):
         'category': category
     }
     return render(request, 'error/404.html',context)
+
+
+def CHECKOUT(request, slug):
+    course = Course.objects.get(slug = slug)
+    if course.price == 0:
+        usercourse = UserCourse(
+            user = request.user,
+            course = course
+        )
+        usercourse.save()
+        return redirect('home')
+    return render(request, 'checkout/checkout.html')

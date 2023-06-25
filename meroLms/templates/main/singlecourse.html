@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block title%} {{course.title}} {% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block title%} {{course.title}} {% endblock %} {% block content %} {% load course_tags %}
 <!-- start of the course section -->
 <div class="container">
   <div class="row mb-8">
@@ -206,7 +206,7 @@
                 {% endfor %}
           </ul>
         </div>
-        #course Details page
+
         <div
           class="tab-pane fade"
           id="pills-curriculum"
@@ -762,16 +762,26 @@
         </a>
 
         <div class="pt-5 pb-4 px-5 px-lg-3 px-xl-5">
+          {% if course.price == 0 %}
           <div class="d-flex align-items-center mb-2">
-            <ins class="h2 mb-0">$89.99</ins>
-            <del class="ms-3">339.99</del>
+            <ins class="h2 mb-0 text-primary">Free</ins>
             <div
               class="badge badge-lg badge-purple text-white ms-auto fw-normal"
             >
-              91% Off
+              {{course.discount}} % off
             </div>
           </div>
-
+          {% else %}
+          <div class="d-flex align-items-center mb-2">
+            <del class="ms-3">Nrs {{course.price}}</del>
+            <ins class="h2 mb-0">Nrs {% discount_calculation course.price course.discount %}</ins>
+            <div
+              class="badge badge-lg badge-purple text-white ms-auto fw-normal"
+            >
+              {{course.discount}} % off
+            </div>
+          </div>
+          {% endif %}
           <div class="d-flex align-items-center text-alizarin mb-6">
             <!-- Icon -->
             <svg
@@ -809,19 +819,16 @@
             <span class="ms-2">2 days left at this price!</span>
           </div>
 
-          <button
+          <a href="#"
             class="btn btn-primary btn-block mb-3"
-            type="button"
-            name="button"
           >
-            BUY NOW
-          </button>
+           ENROLL
+          </a>
           <button
             class="btn btn-orange btn-block mb-6"
-            type="button"
-            name="button"
+             disabled
           >
-            ENROLL
+            ALREADY ENROLL
           </button>
 
           <ul class="list-group list-group-flush">
